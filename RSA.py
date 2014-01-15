@@ -46,7 +46,7 @@ def modInv(a, m):
         linearcombination = extendedEuclid(a, m)
         return linearcombination[1] % m
 
-
+#Léo: vou fazer este extractTwos
 def extractTwos(m):
     '''m is a positive integer. A tuple (s, d) of integers is returned
     such that m = (2 ** s) * d.'''
