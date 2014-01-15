@@ -4,6 +4,7 @@ import math
 import copy
 
 
+# Gustavo - Vou começar logo fazendo classes de Maior Divisor Comum
 def euclid(a, b):
     '''returns the Greatest Common Divisor of a and b'''
     a = abs(a)
