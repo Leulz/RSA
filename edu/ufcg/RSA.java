@@ -47,6 +47,20 @@ public class RSA {
 		}
 		
 	}
-
+    	private static int[] extraiDois(int m) {
+    		assert m >= 0;
+	    	int i = 0;
+    		double potencia = Math.pow(2,i);
+	    	int potenciaInteiro = (int) potencia;
+    		while ((m & potenciaInteiro) == 0) {
+	    	     i += 1;
+    		     potencia = Math.pow(2,i);
+	    	     potenciaInteiro = (int) potencia;
+    		}
+	    	int[] retorno = new int[2];
+    		retorno[0] = i;
+	    	retorno[1] = m>>i;
+    		return retorno;    	
+    }
 
 }
