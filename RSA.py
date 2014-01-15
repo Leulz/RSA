@@ -16,7 +16,7 @@ def euclid(a, b):
         a, b = b, a % b
     return a
 
-
+# DONE!
 def coprime(l):
     '''returns 'True' if the values in the list L are all co-prime
        otherwier, it returns 'False'. '''
