@@ -4,7 +4,7 @@ public class RSA {
   
 	/*
 	 * Metodo auxiliar para calcular o Maximo Divisor Comum entre A e B.
-	 * ~Gustavo~
+	 * ~~Gustavo
 	 */
 	private static int MDC(int a, int b) {
 	    
@@ -30,6 +30,22 @@ public class RSA {
 		}
 
 		return a;
+	}
+	
+	/*
+	 * Metodo auxiliar para testar se dois numeros sao coprimos.
+	 * ~~Gustavo
+	 */
+	private static boolean coprimo(int a, int b) {
+		
+		if (MDC(a,b) == 1) {
+			
+			return true;
+		} else {
+			
+			return false;
+		}
+		
 	}
 
 
