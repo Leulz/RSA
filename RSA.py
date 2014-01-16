@@ -58,8 +58,7 @@ def extractTwos(m):
     while m & (2 ** i) == 0:
         i += 1
     return (i, m >> i)
-
-
+#Léo: fazendo este agora
 def int2baseTwo(x):
     '''x is a positive integer. Convert it to base two as a list of integers
     in reverse order as a list.'''
