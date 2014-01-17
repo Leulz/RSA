@@ -91,7 +91,7 @@ def modExp(a, d, n):
             result *= base2D[i] * modArray[i]
     return result % n
 
-
+#Léo: fazendo este
 def millerRabin(n, k):
     '''
     Miller Rabin pseudo-prime test
