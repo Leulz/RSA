@@ -61,6 +61,13 @@ public class RSA {
     		retorno[0] = i;
 	    	retorno[1] = m>>i;
     		return retorno;    	
-    }
-
+        }
+        public static int modexp(int a, int b, int n) {
+            if (b == 0) return 1;
+            long t = modexp(a, b/2, n);
+            long c = (t * t) % n;
+            if (b % 2 == 1)
+               c = (c * a) % n;
+            return (int) c;
+        }
 }
