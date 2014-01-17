@@ -47,6 +47,7 @@ def modInv(a, m):
         return linearcombination[1] % m
 
 #Léo: vou fazer este extractTwos
+#Feito
 def extractTwos(m):
     '''m is a positive integer. A tuple (s, d) of integers is returned
     such that m = (2 ** s) * d.'''
@@ -59,6 +60,7 @@ def extractTwos(m):
         i += 1
     return (i, m >> i)
 #Léo: fazendo este agora
+#Desnecessario, só é usado no modExp, e o algoritmo que usaremos nao precisa deste
 def int2baseTwo(x):
     '''x is a positive integer. Convert it to base two as a list of integers
     in reverse order as a list.'''
@@ -70,7 +72,7 @@ def int2baseTwo(x):
         x >>= 1
     return bitInverse
 
-
+#Feito
 def modExp(a, d, n):
     '''returns a ** d (mod n)'''
     assert d >= 0
