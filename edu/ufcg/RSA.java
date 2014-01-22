@@ -47,6 +47,38 @@ public class RSA {
 		}
 		
 	}
+	
+	/*
+	 * Metodo auxiliar que retorna um array com x, y e z
+	 * sendo que x = MDC (a , b) e
+	 * x = a * z + b * z
+	 * ~~Gustavo
+	 */
+	private static int[] EuclidesEstendido(int a, int b) {
+		
+		int[] retorno = new int[3];
+		
+		if (a == 0) {
+			
+			retorno[0] = b;
+			retorno[1] = 0;
+			retorno[2] = 1;
+			
+			return retorno;
+		
+		} else {
+			
+			int[] valorTemp = EuclidesEstendido(b % a, a);
+			
+			retorno[0] = valorTemp[0];
+			retorno[2] = valorTemp[1];
+			retorno[1] = valorTemp[2] - (b / a) * valorTemp[1];
+			
+			return retorno;
+		}
+	}
+	
+	
     	private static int[] extraiDois(int m) {
     		assert m >= 0;
 	    	int i = 0;
@@ -60,8 +92,10 @@ public class RSA {
 	    	int[] retorno = new int[2];
     		retorno[0] = i;
 	    	retorno[1] = m>>i;
+    	
     		return retorno;    	
         }
+        
         public static int modexp(int a, int b, int n) {
             if (b == 0) return 1;
             long t = modexp(a, b/2, n);
