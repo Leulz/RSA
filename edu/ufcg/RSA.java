@@ -12,7 +12,6 @@ public class RSA {
 		b = Math.abs(b);
 		    
 		if (a < b) {
-		      
 			int temp;
 		      
 			temp = a;
@@ -21,7 +20,6 @@ public class RSA {
 		}
 		    
 		while (b != 0) {
-		      
 			int temp;
 		      
 			temp = a;
@@ -59,7 +57,6 @@ public class RSA {
 		int[] retorno = new int[3];
 		
 		if (a == 0) {
-			
 			retorno[0] = b;
 			retorno[1] = 0;
 			retorno[2] = 1;
@@ -67,7 +64,6 @@ public class RSA {
 			return retorno;
 		
 		} else {
-			
 			int[] valorTemp = EuclidesEstendido(b % a, a);
 			
 			retorno[0] = valorTemp[0];
