@@ -100,4 +100,44 @@ public class RSA {
 			c = (c * a) % n;
 		return (int) c;
 	}
+        private static boolean testaSeComposto(int a, int n) {
+        	int[] tupla2 = extraiDois(n-1);
+        	
+        	int s = tupla2[0];
+        	int d = tupla2[1];
+    		
+        	int x = modexp(a,d,n);
+    		if ((x==1) || (x==(n-1))) {
+    			return true;
+    		}else {
+    			for (int i=1; i<s;i++) {
+    				x = modexp(x,2,n);
+    				if (x==1) return false;
+    				if (x==(n-1)) return true;
+    			}
+    			return false;
+    		}
+    	}
+        private static boolean millerRabin(int n,int k) {
+        	assert n>=1;
+        	assert k>0;
+        	
+        	if (n==2) return true;
+        	if (n%2==0) return false;
+        	
+        	int[] tupla2 = extraiDois(n-1);
+        	
+        	int s = tupla2[0];
+        	int d = tupla2[1];
+        	assert (Math.pow(2, s) * d) == n-1;
+        	for (int i=0;i<k;i++) {
+        		Random a = new Random();
+        		int numero = a.nextInt(n-2);
+        		while (numero<2) {
+        			numero = a.nextInt(n-2);
+        		}
+        		if (testaSeComposto(numero,n) == false) return false;
+        	}
+        	return true;
+        }
 }
