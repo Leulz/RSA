@@ -92,7 +92,7 @@ public class RSA {
 		return retorno;
 	}
 
-	public static int modexp(int a, int b, int n) {
+	private static int modexp(int a, int b, int n) {
 		if (b == 0) return 1;
 		long t = modexp(a, b/2, n);
 		long c = (t * t) % n;
