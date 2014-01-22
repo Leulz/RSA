@@ -25,7 +25,7 @@ def coprime(l):
             return False
     return True
 
-
+# DONE!
 def extendedEuclid(a, b):
     '''return a tuple of three values: x, y and z, such that x is
     the GCD of a and b, and x = y * a + z * b'''
@@ -35,7 +35,7 @@ def extendedEuclid(a, b):
         g, y, x = extendedEuclid(b % a, a)
         return (g, x - (b // a) * y, y)
 
-
+# Gustavo - Vou tentar fazer esse amanha de manha
 def modInv(a, m):
     '''returns the multiplicative inverse of a in modulo m as a
        positve value between zero and m-1'''
