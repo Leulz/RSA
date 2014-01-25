@@ -35,7 +35,7 @@ def extendedEuclid(a, b):
         g, y, x = extendedEuclid(b % a, a)
         return (g, x - (b // a) * y, y)
 
-# Gustavo - Vou tentar fazer esse amanha de manha
+# DONE!
 def modInv(a, m):
     '''returns the multiplicative inverse of a in modulo m as a
        positve value between zero and m-1'''
