@@ -136,6 +136,7 @@ public class RSA {
 			c = (c * a) % n;
 		return (int) c;
 	}
+	
         private static boolean testaSeComposto(int a, int n) {
         	int[] tupla2 = extraiDois(n-1);
         	
@@ -154,6 +155,7 @@ public class RSA {
     			return false;
     		}
     	}
+    	
         private static boolean millerRabin(int n,int k) {
         	assert n>=1;
         	assert k>0;
@@ -176,4 +178,23 @@ public class RSA {
         	}
         	return true;
         }
+        
+	/*
+	 * Testa se um numero e realmente um primo.
+	 * Retorna true se for e false se nao for.
+	 * ~~Gustavo
+	 */
+	private static boolean testePrimo(int n) {
+		
+		for (int i = 2; i <= Math.sqrt(n); i++) {
+			
+			if (n % i == 0) {
+				
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
 }
