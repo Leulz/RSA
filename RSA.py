@@ -92,6 +92,7 @@ def modExp(a, d, n):
     return result % n
 
 #Léo: fazendo este
+#Feito
 def millerRabin(n, k):
     '''
     Miller Rabin pseudo-prime test
@@ -140,7 +141,7 @@ def millerRabin(n, k):
             return False
     return True  # actually, we should return probably true.
 
-#Léo: fazendo este.
+#DONE!
 def primeSieve(k):
     '''return a list with length k + 1, showing if list[i] == 1, i is a prime
     else if list[i] == 0, i is a composite, if list[i] == -1, not defined'''
