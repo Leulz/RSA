@@ -6,7 +6,7 @@ public class RSA {
 	 * Metodo auxiliar para calcular o Maximo Divisor Comum entre A e B.
 	 * ~~Gustavo
 	 */
-	private static int MDC(int a, int b) {
+	private static int mdc(int a, int b) {
 	    
 		a = Math.abs(a);
 		b = Math.abs(b);
@@ -36,7 +36,7 @@ public class RSA {
 	 */
 	private static boolean coprimo(int a, int b) {
 		
-		if (MDC(a,b) == 1) {
+		if (mdc(a,b) == 1) {
 			
 			return true;
 		} else {
@@ -52,7 +52,7 @@ public class RSA {
 	 * x = a * z + b * z
 	 * ~~Gustavo
 	 */
-	private static int[] EuclidesEstendido(int a, int b) {
+	private static int[] euclidesEstendido(int a, int b) {
 		
 		int[] retorno = new int[3];
 		
@@ -64,13 +64,32 @@ public class RSA {
 			return retorno;
 		
 		} else {
-			int[] valorTemp = EuclidesEstendido(b % a, a);
+			int[] valorTemp = euclidesEstendido(b % a, a);
 			
 			retorno[0] = valorTemp[0];
 			retorno[2] = valorTemp[1];
 			retorno[1] = valorTemp[2] - (b / a) * valorTemp[1];
 			
 			return retorno;
+		}
+	}
+	
+	/*
+	 * Metodo auxiliar para calcular o inverso multiplicativo de a mod m.
+	 * Como um valor positivo entre 0 e m-1.
+	 * ~~Gustavo
+	 */
+	private static int modInv(int a, int m) {
+		
+		if (!(coprimo(a, m))) {
+			
+			return 0;
+		} else {
+			
+			int[] combinacaoLinear = new int[3];
+			combinacaoLinear = euclidesEstendido(a ,m);
+			
+			return combinacaoLinear[1] % m;
 		}
 	}
 	
