@@ -159,4 +159,50 @@ public class RSA {
         	}
         	return true;
         }
+        private static Integer retornaUmPrimo(int a, int b, int k) throws Exception{
+        	Random c = new Random();
+        	int numero = (b-a) + c.nextInt(a+1);
+        	for (int i=0;i<10*Math.log(numero)+3;i++) {
+        		if (millerRabin(numero, k)) {
+        			return numero;
+        		}else {
+        			numero++;
+        		}
+        	}
+        	throw new Exception("Tentativas de achar um primo no intervalo dado foram esgotadas.");
+        }
+        private static int[] novaChave(int a, int b, int k) {
+        	int p = 0, q = 0, numero = 0;
+        	int[] retorno = new int[3];
+        	try {
+        		p = retornaUmPrimo(a,b,k);
+        		while (true) {
+        			q = retornaUmPrimo(a,b,k);
+        			if (q!=p) {
+        				break;
+        			}
+        		}
+        	}catch (Exception e) {
+        		e.getMessage();
+        	}
+        	
+        	int n = p*q;
+        	int m = (p-1) * (q-1);
+        	
+        	while (true) {
+        		Random c = new Random();
+        		numero = c.nextInt(m);
+        		while (numero==0) {
+        			numero = c.nextInt(m);
+        		}
+        		if (coprimo(m, numero)) {
+        			break;
+        		}
+        	}
+        	int d = modInv(numero, m);
+        	retorno[0] = n;
+        	retorno[1] = numero;
+        	retorno[2] = d;
+        	return retorno;
+        }
 }
