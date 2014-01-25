@@ -93,6 +93,23 @@ public class RSA {
 		}
 	}
 	
+	/*
+	 * Testa se um numero e realmente um primo.
+	 * Retorna true se for e false se nao for.
+	 */
+	private static boolean testePrimo(int n) {
+		
+		for (int i = 2; i <= Math.sqrt(n); i++) {
+			
+			if (n % i == 0) {
+				
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
 	
 	private static int[] extraiDois(int m) {
 		assert m >= 0;
