@@ -182,6 +182,7 @@ public class RSA {
 	/*
 	 * Testa se um numero e realmente um primo.
 	 * Retorna true se for e false se nao for.
+	 * So usado em primoSieve.
 	 * ~~Gustavo
 	 */
 	private static boolean testePrimo(int n) {
@@ -205,6 +206,7 @@ public class RSA {
 	/*
 	 * Retorna um array de tamanho k+1, se retorno[i] == 1, i e primo.
 	 * se retorno[i] == 0, i nao e primo.
+	 * ~~Gustavo
 	 */
 	private static int[] primoSieve(int k) {
 		
