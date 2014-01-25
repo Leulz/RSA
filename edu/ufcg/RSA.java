@@ -178,7 +178,6 @@ public class RSA {
         	}
         	return true;
         }
-<<<<<<< HEAD
         private static Integer retornaUmPrimo(int a, int b, int k) throws Exception{
         	Random c = new Random();
         	int numero = (b-a) + c.nextInt(a+1);
@@ -225,8 +224,6 @@ public class RSA {
         	retorno[2] = d;
         	return retorno;
         }
-=======
-        
 	/*
 	 * Testa se um numero e realmente um primo.
 	 * Retorna true se for e false se nao for.
@@ -273,5 +270,4 @@ public class RSA {
 		
 		return resultado;
 	}
->>>>>>> 5f19fabeebdfcbfbcb44a9a2cc7d1b8dd711be2b
 }
