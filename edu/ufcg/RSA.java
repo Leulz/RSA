@@ -3,7 +3,7 @@ package edu.ufcg;
 public class RSA {
   
 	/*
-	 * Metodo auxiliar para calcular o Maximo Divisor Comum entre A e B.
+	 * Calcula o Maximo Divisor Comum entre A e B.
 	 * ~~Gustavo
 	 */
 	private static int mdc(int a, int b) {
@@ -31,7 +31,7 @@ public class RSA {
 	}
 	
 	/*
-	 * Metodo auxiliar para testar se dois numeros sao coprimos.
+	 * Testa se dois numeros sao coprimos.
 	 * ~~Gustavo
 	 */
 	private static boolean coprimo(int a, int b) {
@@ -75,7 +75,7 @@ public class RSA {
 	}
 	
 	/*
-	 * Metodo auxiliar para calcular o inverso multiplicativo de a mod m.
+	 * Calcula o inverso multiplicativo de a mod m.
 	 * Como um valor positivo entre 0 e m-1.
 	 * ~~Gustavo
 	 */
@@ -91,6 +91,23 @@ public class RSA {
 			
 			return combinacaoLinear[1] % m;
 		}
+	}
+	
+	/*
+	 * Testa se um numero e realmente um primo.
+	 * Retorna true se for e false se nao for.
+	 */
+	private static boolean testePrimo(int n) {
+		
+		for (int i = 2; i <= Math.sqrt(n); i++) {
+			
+			if (n % i == 0) {
+				
+				return false;
+			}
+		}
+		
+		return true;
 	}
 	
 	
@@ -119,6 +136,7 @@ public class RSA {
 			c = (c * a) % n;
 		return (int) c;
 	}
+	
         private static boolean testaSeComposto(int a, int n) {
         	int[] tupla2 = extraiDois(n-1);
         	
@@ -137,6 +155,7 @@ public class RSA {
     			return false;
     		}
     	}
+    	
         private static boolean millerRabin(int n,int k) {
         	assert n>=1;
         	assert k>0;
@@ -159,6 +178,7 @@ public class RSA {
         	}
         	return true;
         }
+<<<<<<< HEAD
         private static Integer retornaUmPrimo(int a, int b, int k) throws Exception{
         	Random c = new Random();
         	int numero = (b-a) + c.nextInt(a+1);
@@ -205,4 +225,53 @@ public class RSA {
         	retorno[2] = d;
         	return retorno;
         }
+=======
+        
+	/*
+	 * Testa se um numero e realmente um primo.
+	 * Retorna true se for e false se nao for.
+	 * So usado em primoSieve.
+	 * ~~Gustavo
+	 */
+	private static boolean testePrimo(int n) {
+		
+		if (n == 1) {
+			
+			return false;
+		}
+		
+		for (int i = 2; i <= Math.sqrt(n); i++) {
+			
+			if (n % i == 0) {
+				
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	/*
+	 * Retorna um array de tamanho k+1, se retorno[i] == 1, i e primo.
+	 * se retorno[i] == 0, i nao e primo.
+	 * ~~Gustavo
+	 */
+	private static int[] primoSieve(int k) {
+		
+		int[] resultado = new int[k+1];
+		
+		for (int i = 1; i <= k; i++) {
+			
+			if (testePrimo(i)) {
+				
+				resultado[i] = 1;
+			} else {
+				
+				resultado[i] = 0;
+			}
+		}
+		
+		return resultado;
+	}
+>>>>>>> 5f19fabeebdfcbfbcb44a9a2cc7d1b8dd711be2b
 }
