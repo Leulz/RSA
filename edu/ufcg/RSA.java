@@ -3,7 +3,7 @@ package edu.ufcg;
 public class RSA {
   
 	/*
-	 * Metodo auxiliar para calcular o Maximo Divisor Comum entre A e B.
+	 * Calcula o Maximo Divisor Comum entre A e B.
 	 * ~~Gustavo
 	 */
 	private static int mdc(int a, int b) {
@@ -31,7 +31,7 @@ public class RSA {
 	}
 	
 	/*
-	 * Metodo auxiliar para testar se dois numeros sao coprimos.
+	 * Testa se dois numeros sao coprimos.
 	 * ~~Gustavo
 	 */
 	private static boolean coprimo(int a, int b) {
@@ -75,7 +75,7 @@ public class RSA {
 	}
 	
 	/*
-	 * Metodo auxiliar para calcular o inverso multiplicativo de a mod m.
+	 * Calcula o inverso multiplicativo de a mod m.
 	 * Como um valor positivo entre 0 e m-1.
 	 * ~~Gustavo
 	 */
