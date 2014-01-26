@@ -248,4 +248,18 @@ private static boolean testePrimo(int n) {
         	retorno[2] = d;
         	return retorno;
         }
+        private static int[] stringParaListaNumeros(String string) {
+        	int[] listaRetorno = new int[string.length()]; 
+        	for (int i=0; i<string.length(); i++) {
+        		listaRetorno[i] = (int) string.charAt(i);
+        	}
+        	return listaRetorno;
+        }
+        private static String listaNumerosParaString(int[] listaNumeros) {
+        	String retorno = "";
+        	for (int i=0;i<listaNumeros.length; i++) {
+        		retorno+=(char)listaNumeros[i];
+        	}
+        	return retorno;
+        }
 }
