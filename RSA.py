@@ -197,18 +197,20 @@ def newKey(a, b, k):
     return (n, e, d)
 
 #Leo: fazendo este
+#Feito
 def string2numList(strn):
     '''Converts a string to a list of integers based on ASCII values'''
     # Note that ASCII printable characters range is 0x20 - 0x7E
     return [ord(chars) for chars in strn]
 
 #Leo: fazendo este
+#Feito
 def numList2string(l):
     '''Converts a list of integers to a string based on ASCII values'''
     # Note that ASCII printable characters range is 0x20 - 0x7E
     return ''.join(map(chr, l))
 
-
+#Leo: fazendo
 def numList2blocks(l, n):
     '''Take a list of integers(each between 0 and 127), and combines them
     into block size n using base 256. If len(L) % n != 0, use some random
@@ -226,7 +228,7 @@ def numList2blocks(l, n):
         returnList.append(block)
     return returnList
 
-
+#Leo: fazendo
 def blocks2numList(blocks, n):
     '''inverse function of numList2blocks.'''
     toProcess = copy.copy(blocks)
