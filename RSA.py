@@ -161,7 +161,7 @@ def primeSieve(k):
             result[i] = 0
     return result
 
-
+#Feito
 def findAPrime(a, b, k):
     '''Return a pseudo prime number roughly between a and b,
     (could be larger than b). Raise ValueError if cannot find a
@@ -174,7 +174,7 @@ def findAPrime(a, b, k):
             x += 1
     raise ValueError
 
-
+#Feito
 def newKey(a, b, k):
     ''' Try to find two large pseudo primes roughly between a and b.
     Generate public and private keys for RSA encryption.
@@ -196,13 +196,13 @@ def newKey(a, b, k):
     d = modInv(e, m)
     return (n, e, d)
 
-
+#Leo: fazendo este
 def string2numList(strn):
     '''Converts a string to a list of integers based on ASCII values'''
     # Note that ASCII printable characters range is 0x20 - 0x7E
     return [ord(chars) for chars in strn]
 
-
+#Leo: fazendo este
 def numList2string(l):
     '''Converts a list of integers to a string based on ASCII values'''
     # Note that ASCII printable characters range is 0x20 - 0x7E
