@@ -262,4 +262,26 @@ private static boolean testePrimo(int n) {
         	}
         	return retorno;
         }
+        private static ArrayList<Integer> listaNumeroParaBlocos(int[] listaNumeros, int bloco) {
+        	ArrayList<Integer> listaRetorno = new ArrayList<Integer>();
+        	ArrayList<Integer> listaCopia = new ArrayList<Integer>();
+        	Random c = new Random();
+        	for (int i=0; i<listaNumeros.length;i++) {
+        		listaCopia.add(listaNumeros[i]);
+        	}
+        	if (listaCopia.size()%bloco!=0) {
+        		int num = Math.abs(bloco-(listaCopia.size()%bloco));
+        		for (int i=0;i<num;i++) {
+        			listaCopia.add(c.nextInt(95) + 32);
+        		}
+        	}
+        	for (int i=0;i<listaCopia.size();i+=bloco) {
+        		int numero = 0;
+        		for (int j=0;j<bloco;j++) {
+        			numero+=listaCopia.get(i+j)<<(8*(bloco-j-1));
+        		}
+        		listaRetorno.add(numero);
+        	}
+        	return listaRetorno;
+        }
 }

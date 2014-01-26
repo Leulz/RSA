@@ -256,17 +256,4 @@ def decrypt(secret, modN, d, blockSize):
     return numList2string(numList)
 
 if __name__ == '__main__':
-    (n, e, d) = newKey(10 ** 100, 10 ** 101, 50)
-    print ('n = {0}'.format(n))
-    print ('e = {0}'.format(e))
-    print ('d = {0}'.format(d))
-    message = '''
-        We were the Leopards, the Lions, those who'll take our place will be
-        little jackals, hyenas; But we'll go on thinking ourselves the salt of
-        the earth.
-    '''
-    print(message)
-    cipher = encrypt(message, n, e, 15)
-    print(cipher)
-    Amessage = decrypt(cipher, n, d, 15)
-    print(Amessage)
+    print(blocks2numList([1316662, 4134504],3))
