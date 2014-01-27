@@ -95,7 +95,13 @@ public class RSA {
 			return combinacaoLinear[1] % m;
 		}
 	}
-private static boolean testePrimo(int n) {
+	
+	/*
+	 * Testa se um numero e realmente um primo.
+	 * Retorna true se for e false se nao for.
+	 * ~~Gustavo
+	 */
+	private static boolean testePrimo(int n) {
 		
 		if (n == 1) {
 			
@@ -162,7 +168,8 @@ private static boolean testePrimo(int n) {
 			c = (c * a) % n;
 		return (int) c;
 	}
-        private static boolean testaSeComposto(int a, int n) {
+    
+	private static boolean testaSeComposto(int a, int n) {
         	int[] tupla2 = extraiDois(n-1);
         	
         	int s = tupla2[0];
@@ -284,4 +291,38 @@ private static boolean testePrimo(int n) {
         	}
         	return listaRetorno;
         }
+        
+        /*
+         * Funcao inversa ao listaNumeroParaBlocos.
+         * ~~Gustavo
+         */
+    	private static int[] blocosParaListaNumero(ArrayList<Integer> blocos, int tamanhoBlocos) {
+    		int[] listaRetorno = new int[blocos.size()*tamanhoBlocos];
+    		ArrayList<Integer> listaCopia = new ArrayList<Integer>();
+    		int indice = 0;
+    		
+    		for (int e : blocos) {
+    			listaCopia.add(e);
+    		}
+    		
+    		for (int numBloco : listaCopia) {
+    			ArrayList<Integer> listaProcessar = new ArrayList<Integer>();
+    			
+    			for (int i = 0; i < tamanhoBlocos; i++) {
+    				
+    				listaProcessar.add(numBloco % 256);
+    				numBloco >>= 8;
+    			}
+    			
+    			Collections.reverse(listaProcessar);
+    			
+    			for (int e : listaProcessar) {
+    				listaRetorno[indice] = e;
+    				indice++;
+    			}
+    		}
+    		
+    		return listaRetorno;
+    	}
+        
 }
