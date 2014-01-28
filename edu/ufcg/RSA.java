@@ -40,21 +40,21 @@ public class RSA {
             return a;
     }
 	
-	/*
-	 * Metodo auxiliar para testar se dois numeros sao coprimos.
-	 * ~~Gustavo
-	 */
-	private static boolean coprimo(int a, int b) {
-		
-		if (mdc(a,b) == 1) {
-			
-			return true;
-		} else {
-			
-			return false;
-		}
-		
-	}
+    /*
+     * Testa se dois numeros sao coprimos.
+     * ~~Gustavo
+     */
+    private static boolean coprimo(BigInteger a, BigInteger b) {
+            
+            if (mdc(a,b).equals(BigInteger.ONE)) {
+                    
+                    return true;
+            } else {
+                    
+                    return false;
+            }
+            
+    }
 	
 	/*
 	 * Metodo auxiliar que retorna um array com x, y e z
