@@ -1,9 +1,9 @@
 package edu.ufcg;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Map;
 import java.util.Random;
 
 public class RSA {
