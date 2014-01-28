@@ -9,52 +9,49 @@ import java.util.Random;
 
 public class RSA {
   
-    /*
-     * Calcular o Maximo Divisor Comum entre A e B.
-     * ~~Gustavo
-     */
-    private static BigInteger mdc(BigInteger a, BigInteger b) {
-    
-            a = a.abs();
-            b = b.abs();
-            
-            //if (a < b) {
-            if (a.compareTo(b) == -1) {
-                    BigInteger temp;
-            
-                    temp = a;
-                    a = b;
-                    b = temp;
-            }
-            
-            //while (b != 0) {
-            while (!(b.equals(BigInteger.ZERO))) {
-            		BigInteger temp;
-            
-                    temp = a;
-                    a = b;
-                    //b = temp % b;
-                    b = temp.mod(b);
-            }
+	/*
+	 * Metodo auxiliar para calcular o Maximo Divisor Comum entre A e B.
+	 * ~~Gustavo
+	 */
+	private static int mdc(int a, int b) {
+	    
+		a = Math.abs(a);
+		b = Math.abs(b);
+		    
+		if (a < b) {
+			int temp;
+		      
+			temp = a;
+			a = b;
+			b = temp;
+		}
+		    
+		while (b != 0) {
+			int temp;
+		      
+			temp = a;
+			a = b;
+			b = temp % b;
+		}
 
-            return a;
-    }
+		return a;
+	}
 	
-    /*
-     * Testa se dois numeros sao coprimos.
-     * ~~Gustavo
-     */
-    private static boolean coprimo(BigInteger a, BigInteger b) {
-            
-            if (mdc(a,b).equals(BigInteger.ONE)) {
-                    
-                    return true;
-            } else {
-                    
-                    return false;
-            }
-            
-    }
+	/*
+	 * Metodo auxiliar para testar se dois numeros sao coprimos.
+	 * ~~Gustavo
+	 */
+	private static boolean coprimo(int a, int b) {
+		
+		if (mdc(a,b) == 1) {
+			
+			return true;
+		} else {
+			
+			return false;
+		}
+		
+	}
 	
 	/*
 	 * Metodo auxiliar que retorna um array com x, y e z
@@ -62,18 +59,33 @@ public class RSA {
 	 * x = a * z + b * z
 	 * ~~Gustavo
 	 */
-	private static BigInteger[] euclidesEstendido(BigInteger a, BigInteger b) {
+	private static int[] euclidesEstendido(int a, int b) {
+		if (b == 0)
+	         return new int[] { a, 1, 0 };
+
+	      int[] vals = euclidesEstendido(b, a % b);
+	      int d = vals[0];
+	      int c = vals[2];
+	      int f = vals[1] - (a / b) * vals[2];
+	      return new int[] { d, c, f };
+		/*int[] retorno = new int[3];
 		
-		if (b.equals(BigInteger.ZERO)) {
-	         return new BigInteger[] { a, BigInteger.ONE, BigInteger.ZERO };
-		}
-	    
-		BigInteger[] vals = euclidesEstendido(b, a.mod(b));
-	    BigInteger d = vals[0];
-	    BigInteger c = vals[2];
-	    BigInteger f = vals[1].subtract((a.divide(b)).multiply(vals[2]));
-	    
-	    return new BigInteger[] { d, c, f };
+		if (a == 0) {
+			retorno[0] = b;
+			retorno[1] = 0;
+			retorno[2] = 1;
+			
+			return retorno;
+		
+		} else {
+			int[] valorTemp = euclidesEstendido(b % a, a);
+			
+			retorno[0] = valorTemp[0];
+			retorno[2] = valorTemp[1];
+			retorno[1] = valorTemp[2] - (b / a) * valorTemp[1];
+			
+			return retorno;
+		}*/
 	}
 
 	/*
@@ -81,21 +93,22 @@ public class RSA {
 	 * Como um valor positivo entre 0 e m-1.
 	 * ~~Gustavo
 	 */
-	private static BigInteger modInv(BigInteger a, BigInteger m) {
+	private static int modInv(int a, int m) {
 		
 		if (!(coprimo(a, m))) {
 			
-			return BigInteger.ZERO;
+			return 0;
 		} else {
-			
-			BigInteger[] combinacaoLinear = new BigInteger[3];
-			combinacaoLinear = euclidesEstendido(a, m);
-			
-			return combinacaoLinear[1].mod(m);
-			//return a.modInverse(m);
+			BigInteger bi1 = new BigInteger(Integer.toString(a));
+			BigInteger bi2 = new BigInteger(Integer.toString(m));
+			 
+			return bi1.modInverse(bi2).intValue();
 		}
-	}
-	
+			/*int[] combinacaoLinear = new int[3];
+			combinacaoLinear = euclidesEstendido(a ,m);
+			return combinacaoLinear[1] % m;
+			}*/
+	}	
 	/*
 	 * Testa se um numero e realmente um primo.
 	 * Retorna true se for e false se nao for.
@@ -187,7 +200,6 @@ public class RSA {
     			return false;
     		}
     	}
-	
         private static boolean millerRabin(int n,int k) {
         	assert n>=1;
         	assert k>0;
@@ -210,7 +222,6 @@ public class RSA {
         	}
         	return true;
         }
-        
         private static Integer retornaUmPrimo(int a, int b, int k) throws Exception{
         	Random c = new Random();
         	int numero = (b-a) + c.nextInt(a+1);
@@ -326,27 +337,27 @@ public class RSA {
     		
     		return listaRetorno;
     	}
-    	private static int[] criptografar(String mensagem, int modN, int e, int bloco) {
+    	private static int[] criptografar(String mensagem, int modN, int e) {
     		int[] listaNumeros = stringParaListaNumeros(mensagem);
-    		ArrayList<Integer> listaBlocos = listaNumeroParaBlocos(listaNumeros, bloco);
+    		ArrayList<Integer> listaBlocos = listaNumeroParaBlocos(listaNumeros, 3);
     		int[] listaRetorno = new int[listaBlocos.size()];
     		for(int i=0;i<listaBlocos.size();i++) {
     			listaRetorno[i] = modexp(listaBlocos.get(i), e, modN);
     		}
     		return listaRetorno;
     	}
-    	private static String descriptografar(int[] mensagem, int modN, int d, int bloco) {
+    	private static String descriptografar(int[] mensagem, int modN, int d) {
     		ArrayList<Integer> blocoNumeros = new ArrayList<Integer>();
     		for(int i=0;i<mensagem.length;i++) {
     			blocoNumeros.add(modexp(mensagem[i], d, modN));
     		}
-    		int[] listaNumeros = blocosParaListaNumero(blocoNumeros, bloco);
+    		int[] listaNumeros = blocosParaListaNumero(blocoNumeros, 3);
     		return listaNumerosParaString(listaNumeros);
     	}
     	public static void main(String[] args) {
     		int[] chave = novaChave(4000,40000,50);
-    		int[] criptografia = criptografar("To be or not to be, that is the question.",chave[0],chave[1],2);
-    		String descriptografia = descriptografar(criptografia, chave[0], chave[2], 2);
+    		int[] criptografia = criptografar("To be, or not to be. That is the question",chave[0],chave[1]);
+    		String descriptografia = descriptografar(criptografia, chave[0], chave[2]);
     		System.out.println(Arrays.toString(criptografia));
     		System.out.println(descriptografia);
 		}
