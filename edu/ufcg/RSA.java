@@ -9,33 +9,36 @@ import java.util.Random;
 
 public class RSA {
   
-	/*
-	 * Metodo auxiliar para calcular o Maximo Divisor Comum entre A e B.
-	 * ~~Gustavo
-	 */
-	private static int mdc(int a, int b) {
-	    
-		a = Math.abs(a);
-		b = Math.abs(b);
-		    
-		if (a < b) {
-			int temp;
-		      
-			temp = a;
-			a = b;
-			b = temp;
-		}
-		    
-		while (b != 0) {
-			int temp;
-		      
-			temp = a;
-			a = b;
-			b = temp % b;
-		}
+    /*
+     * Calcular o Maximo Divisor Comum entre A e B.
+     * ~~Gustavo
+     */
+    private static BigInteger mdc(BigInteger a, BigInteger b) {
+    
+            a = a.abs();
+            b = b.abs();
+            
+            //if (a < b) {
+            if (a.compareTo(b) == -1) {
+                    BigInteger temp;
+            
+                    temp = a;
+                    a = b;
+                    b = temp;
+            }
+            
+            //while (b != 0) {
+            while (b.compareTo(BigInteger.ZERO) == 1 || b.compareTo(BigInteger.ZERO) == -1) {
+            		BigInteger temp;
+            
+                    temp = a;
+                    a = b;
+                    //b = temp % b;
+                    b = temp.mod(b);
+            }
 
-		return a;
-	}
+            return a;
+    }
 	
 	/*
 	 * Metodo auxiliar para testar se dois numeros sao coprimos.
@@ -200,6 +203,7 @@ public class RSA {
     			return false;
     		}
     	}
+	
         private static boolean millerRabin(int n,int k) {
         	assert n>=1;
         	assert k>0;
@@ -222,6 +226,7 @@ public class RSA {
         	}
         	return true;
         }
+        
         private static Integer retornaUmPrimo(int a, int b, int k) throws Exception{
         	Random c = new Random();
         	int numero = (b-a) + c.nextInt(a+1);
