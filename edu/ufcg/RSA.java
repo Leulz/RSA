@@ -81,21 +81,22 @@ public class RSA {
 	 * Como um valor positivo entre 0 e m-1.
 	 * ~~Gustavo
 	 */
-	private static BigInteger modInv(BigInteger a, BigInteger m) {
+	private static int modInv(int a, int m) {
 		
 		if (!(coprimo(a, m))) {
 			
-			return BigInteger.ZERO;
+			return 0;
 		} else {
-			
-			BigInteger[] combinacaoLinear = new BigInteger[3];
-			combinacaoLinear = euclidesEstendido(a, m);
-			
-			return combinacaoLinear[1].mod(m);
-			//return a.modInverse(m);
+			BigInteger bi1 = new BigInteger(Integer.toString(a));
+			BigInteger bi2 = new BigInteger(Integer.toString(m));
+			 
+			return bi1.modInverse(bi2).intValue();
 		}
-	}
-	
+			/*int[] combinacaoLinear = new int[3];
+			combinacaoLinear = euclidesEstendido(a ,m);
+			return combinacaoLinear[1] % m;
+			}*/
+	}	
 	/*
 	 * Testa se um numero e realmente um primo.
 	 * Retorna true se for e false se nao for.
