@@ -327,5 +327,30 @@ public class RSA {
     		
     		return listaRetorno;
     	}
+	private static int[] criptografar(String mensagem, int modN, int e, int bloco) {
+    		int[] listaNumeros = stringParaListaNumeros(mensagem);
+    		ArrayList<Integer> listaBlocos = listaNumeroParaBlocos(listaNumeros, bloco);
+    		int[] listaRetorno = new int[listaBlocos.size()];
+    		for(int i=0;i<listaBlocos.size();i++) {
+    			listaRetorno[i] = modexp(listaBlocos.get(i), e, modN);
+    		}
+    		return listaRetorno;
+    	}
+    	private static String descriptografar(int[] mensagem, int modN, int d, int bloco) {
+    		ArrayList<Integer> blocoNumeros = new ArrayList<Integer>();
+    		for(int i=0;i<mensagem.length;i++) {
+    			blocoNumeros.add(modexp(mensagem[i], d, modN));
+    		}
+    		int[] listaNumeros = blocosParaListaNumero(blocoNumeros, bloco);
+    		return listaNumerosParaString(listaNumeros);
+    	}
+	    	public static void main(String[] args) {
+		//Exemplo de funcionamento do codigo
+    		int[] chave = novaChave(4000,45000,50);
+    		int[] criptografia = criptografar("To be or not to be, that is the question.",chave[0],chave[1],2);
+    		String descriptografia = descriptografar(criptografia, chave[0], chave[2], 2);
+    		System.out.println(Arrays.toString(criptografia));
+    		System.out.println(descriptografia);
+		}
         
 }
