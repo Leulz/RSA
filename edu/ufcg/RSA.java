@@ -28,7 +28,7 @@ public class RSA {
             }
             
             //while (b != 0) {
-            while (b.compareTo(BigInteger.ZERO) == 1 || b.compareTo(BigInteger.ZERO) == -1) {
+            while (!(b.equals(BigInteger.ZERO))) {
             		BigInteger temp;
             
                     temp = a;
@@ -62,33 +62,18 @@ public class RSA {
 	 * x = a * z + b * z
 	 * ~~Gustavo
 	 */
-	private static int[] euclidesEstendido(int a, int b) {
-		if (b == 0)
-	         return new int[] { a, 1, 0 };
-
-	      int[] vals = euclidesEstendido(b, a % b);
-	      int d = vals[0];
-	      int c = vals[2];
-	      int f = vals[1] - (a / b) * vals[2];
-	      return new int[] { d, c, f };
-		/*int[] retorno = new int[3];
+	private static BigInteger[] euclidesEstendido(BigInteger a, BigInteger b) {
 		
-		if (a == 0) {
-			retorno[0] = b;
-			retorno[1] = 0;
-			retorno[2] = 1;
-			
-			return retorno;
-		
-		} else {
-			int[] valorTemp = euclidesEstendido(b % a, a);
-			
-			retorno[0] = valorTemp[0];
-			retorno[2] = valorTemp[1];
-			retorno[1] = valorTemp[2] - (b / a) * valorTemp[1];
-			
-			return retorno;
-		}*/
+		if (b.equals(BigInteger.ZERO)) {
+	         return new BigInteger[] { a, BigInteger.ONE, BigInteger.ZERO };
+		}
+	    
+		BigInteger[] vals = euclidesEstendido(b, a.mod(b));
+	    BigInteger d = vals[0];
+	    BigInteger c = vals[2];
+	    BigInteger f = vals[1].subtract((a.divide(b)).multiply(vals[2]));
+	    
+	    return new BigInteger[] { d, c, f };
 	}
 
 	/*
