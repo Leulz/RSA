@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Random;
 
 public class RSA {
@@ -59,8 +60,15 @@ public class RSA {
 	 * ~~Gustavo
 	 */
 	private static int[] euclidesEstendido(int a, int b) {
-		
-		int[] retorno = new int[3];
+		if (b == 0)
+	         return new int[] { a, 1, 0 };
+
+	      int[] vals = euclidesEstendido(b, a % b);
+	      int d = vals[0];
+	      int c = vals[2];
+	      int f = vals[1] - (a / b) * vals[2];
+	      return new int[] { d, c, f };
+		/*int[] retorno = new int[3];
 		
 		if (a == 0) {
 			retorno[0] = b;
@@ -77,9 +85,9 @@ public class RSA {
 			retorno[1] = valorTemp[2] - (b / a) * valorTemp[1];
 			
 			return retorno;
-		}
+		}*/
 	}
-	
+
 	/*
 	 * Metodo auxiliar para calcular o inverso multiplicativo de a mod m.
 	 * Como um valor positivo entre 0 e m-1.
@@ -91,14 +99,16 @@ public class RSA {
 			
 			return 0;
 		} else {
-			
-			int[] combinacaoLinear = new int[3];
-			combinacaoLinear = euclidesEstendido(a ,m);
-			
-			return combinacaoLinear[1] % m;
+			BigInteger bi1 = new BigInteger(Integer.toString(a));
+			BigInteger bi2 = new BigInteger(Integer.toString(m));
+			 
+			return bi1.modInverse(bi2).intValue();
 		}
-	}
-	
+			/*int[] combinacaoLinear = new int[3];
+			combinacaoLinear = euclidesEstendido(a ,m);
+			return combinacaoLinear[1] % m;
+			}*/
+	}	
 	/*
 	 * Testa se um numero e realmente um primo.
 	 * Retorna true se for e false se nao for.
@@ -327,7 +337,7 @@ public class RSA {
     		
     		return listaRetorno;
     	}
-	private static int[] criptografar(String mensagem, int modN, int e, int bloco) {
+    	private static int[] criptografar(String mensagem, int modN, int e, int bloco) {
     		int[] listaNumeros = stringParaListaNumeros(mensagem);
     		ArrayList<Integer> listaBlocos = listaNumeroParaBlocos(listaNumeros, bloco);
     		int[] listaRetorno = new int[listaBlocos.size()];
@@ -344,13 +354,11 @@ public class RSA {
     		int[] listaNumeros = blocosParaListaNumero(blocoNumeros, bloco);
     		return listaNumerosParaString(listaNumeros);
     	}
-	    	public static void main(String[] args) {
-		//Exemplo de funcionamento do codigo
-    		int[] chave = novaChave(4000,45000,50);
+    	public static void main(String[] args) {
+    		int[] chave = novaChave(4000,40000,50);
     		int[] criptografia = criptografar("To be or not to be, that is the question.",chave[0],chave[1],2);
     		String descriptografia = descriptografar(criptografia, chave[0], chave[2], 2);
     		System.out.println(Arrays.toString(criptografia));
     		System.out.println(descriptografia);
 		}
-        
 }
