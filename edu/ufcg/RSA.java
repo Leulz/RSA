@@ -130,7 +130,9 @@ public class RSA {
 
 		return resultado;
 	}
-	/*Retorna uma lista de inteiros [s,d] tal que o argumento m = Math.pow(2,s)*d
+	
+	/*
+	 * Retorna uma lista de inteiros [s,d] tal que o argumento m = Math.pow(2,s)*d
 	 */
 	private static int[] extraiDois(int m) {
 		assert m >= 0;
@@ -150,7 +152,9 @@ public class RSA {
 
 		return retorno;
 	}
-	/*Retorna um inteiro c tal que c = Math.pow(a,b) mod n	 * 
+	
+	/*
+	 * Retorna um inteiro c tal que c = Math.pow(a,b) mod n	 * 
 	 */
 	private static int modexp(int a, int b, int n) {
 		if (b == 0) return 1;
@@ -162,6 +166,7 @@ public class RSA {
 		
 		return (int) c;
 	}
+	
 	/*
 	 * Retorna true ou false dependendo de se "n" é ou não
 	 * capaz de ser primo, usando-se o parâmetro "a" internamente
@@ -209,6 +214,7 @@ public class RSA {
 		}
 		return true;
 	}
+	
 	/*
 	 * Retorna um primo aleatório mais ou menos entre a e b (pode ser maior que b).
 	 * Lançará uma exceção caso as tentativas de se achar um primo superem
@@ -227,6 +233,7 @@ public class RSA {
 		}
 		throw new Exception("Tentativas de achar um primo no intervalo dado foram esgotadas.");
 	}
+	
 	/*
 	 * Retorna uma chave RSA [n,e,d], sendo "n" o mod da chave, 
 	 * "e" o expoente da chave pública e "d" o expoente da chave privada
@@ -266,6 +273,7 @@ public class RSA {
 		retorno[2] = d;
 		return retorno;
 	}
+	
 	/*
 	 * Codifica uma string numa lista de números, usando-se o cast
 	 * (int) para isso .
@@ -278,6 +286,7 @@ public class RSA {
 		}
 		return listaRetorno;
 	}
+	
 	/*
 	 * Método inverso de stringParaListaNumeros.
 	 */
@@ -289,13 +298,13 @@ public class RSA {
 		}
 		return retorno;
 	}
+	
 	/*
 	 * Transforma uma lista de números (string codificada) em um ArrayList de inteiros,
 	 * no qual cada elemento representa "bloco" numeros da lista de números passada
 	 * como argumento, codificados tal que se possa recuperar quais números eram na
 	 * lista de números.
-	 */
-	
+	 */	
 	private static ArrayList<Integer> listaNumeroParaBlocos(int[] listaNumeros, int bloco) {
 		ArrayList<Integer> listaRetorno = new ArrayList<Integer>();
 		ArrayList<Integer> listaCopia = new ArrayList<Integer>();
@@ -324,7 +333,6 @@ public class RSA {
 
 	/*
 	 * Funcao inversa ao listaNumeroParaBlocos.
-	 * 
 	 */
 	private static int[] blocosParaListaNumero(ArrayList<Integer> blocos, int tamanhoBlocos) {
 		int[] listaRetorno = new int[blocos.size()*tamanhoBlocos];
@@ -354,6 +362,7 @@ public class RSA {
 
 		return listaRetorno;
 	}
+	
 	/*
 	 * Criptografa uma mensagem, sendo "modN" o mod da chave RSA, e "e" o expoente
 	 * da chave pública.
@@ -368,6 +377,7 @@ public class RSA {
 		}
 		return listaRetorno;
 	}
+	
 	/*
 	 * Inverso de criptografar, sendo "d" o expoente da chave privada.
 	 */
@@ -382,55 +392,65 @@ public class RSA {
 		
 		return listaNumerosParaString(listaNumeros);
 	}
-	/*
-	 * Cria uma chave RSA.
+	
+	/**
+	 * Construtor que cria uma chave RSA.
 	 */
 	public RSA() {
 		int[] chaves = novaChave(4000,40000,50);
 		chavePublica = new int[] { chaves[0], chaves[1] };
 		chavePrivada = new int[] { chaves[0], chaves[2] };
 	}
-	/*
-	 * Retorna a chave pública.
+	
+	/**
+	 * Metodo para receber a chave publica.
+	 * @return A chave publica.
 	 */
 	public static int[] getChavePublica() {
 		return chavePublica;
 	}
-	/*
-	 * Criptografa uma mensagem usando-se "d" como expoente da criptografia.
+	
+	/**
+	 * Criptografa uma mensagem com a chave privada.
+	 * 
+	 * @param mensagem Mensagem a ser criptogradada.
+	 * @return Mensagem criptografada.
 	 */
 	public static int[] criptografarComChavePrivada(String mensagem) {
 		
 		return criptografar(mensagem, chavePrivada[0], chavePrivada[1]);
 	}
-	/*
-	 * Criptografa uma mensagem usando-se "e" como expoente da criptografia.
+	
+	/**
+	 * Criptografa uma mensagem com uma chave qualquer.
+	 * 
+	 * @param mensagem Mensagem a ser criptogradada.
+	 * @return Mensagem criptografada.
 	 */
 	public static int[] criptografarComChave(String mensagem, int[] chave) {
 		
 		return criptografar(mensagem, chave[0], chave[1]);
 	}
-	/*
+	
+	/**
 	 * Descriptografa uma mensagem criptografada com chave pública.
+	 * 
+	 * @param mensagem Mensagem a ser descriptogradada.
+	 * @return Mensagem descriptografada.
 	 */
 	public static String descriptografarComChavePrivada(int[] mensagem) {
 		
 		return descriptografar(mensagem, chavePrivada[0], chavePrivada[1]);
 	}
-	/*
- 	 * Descriptografa uma mensagem criptografada com chave privada.
+	
+	/**
+	 * Descriptografa uma mensagem criptografada com chave privada.
+	 * 
+	 * @param mensagem Mensagem a ser descriptogradada.
+	 * @return Mensagem descriptografada.
 	 */
 	public static String descriptografarComChave(int[] mensagem, int[] chave) {
 		
 		return descriptografar(mensagem, chave[0], chave[1]);
 	}
-	
-	/*public static void main(String[] args) {
-		RSA chave = new RSA();
-		String mensagem = "Ser ou não ser.";
-		System.out.println(Arrays.toString(getChavePublica()));
-		int[] mensagemCod = criptografarComChave(mensagem, getChavePublica());
-		System.out.println(Arrays.toString(criptografarComChave(mensagem, getChavePublica())));
-		System.out.println(descriptografarComChavePrivada(mensagemCod));
-	}*/
 }
