@@ -299,7 +299,7 @@ public class RSA {
 	private static ArrayList<Integer> listaNumeroParaBlocos(int[] listaNumeros, int bloco) {
 		ArrayList<Integer> listaRetorno = new ArrayList<Integer>();
 		ArrayList<Integer> listaCopia = new ArrayList<Integer>();
-		
+		Random c = new Random();
 		for (int i=0; i<listaNumeros.length;i++) {
 			listaCopia.add(listaNumeros[i]);
 		}
@@ -307,7 +307,7 @@ public class RSA {
 		if (listaCopia.size()%bloco!=0) {
 			int num = Math.abs(bloco-(listaCopia.size()%bloco));
 			for (int i=0;i<num;i++) {
-				listaCopia.add(47);
+				listaCopia.add(c.nextInt(95) + 32);
 			}
 		}
 		
@@ -426,7 +426,7 @@ public class RSA {
 	
 	/*public static void main(String[] args) {
 		RSA chave = new RSA();
-		String mensagem = "Ser ou não ser, eis a questão.";
+		String mensagem = "Ser ou não ser.";
 		System.out.println(Arrays.toString(getChavePublica()));
 		int[] mensagemCod = criptografarComChave(mensagem, getChavePublica());
 		System.out.println(Arrays.toString(criptografarComChave(mensagem, getChavePublica())));
