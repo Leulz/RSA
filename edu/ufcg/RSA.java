@@ -88,50 +88,6 @@ public class RSA {
 	}	
 	
 	/*
-	 * Testa se um numero e realmente um primo.
-	 * Retorna true se for e false se nao for.
-	 */
-	private static boolean testePrimo(int n) {
-
-		if (n == 1) {
-
-			return false;
-		}
-
-		for (int i = 2; i <= Math.sqrt(n); i++) {
-
-			if (n % i == 0) {
-
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	/*
-	 * Retorna um array de tamanho k+1, se retorno[i] == 1, i e primo.
-	 * se retorno[i] == 0, i nao e primo.
-	 */
-	private static int[] primoSieve(int k) {
-
-		int[] resultado = new int[k+1];
-
-		for (int i = 1; i <= k; i++) {
-
-			if (testePrimo(i)) {
-
-				resultado[i] = 1;
-			} else {
-
-				resultado[i] = 0;
-			}
-		}
-
-		return resultado;
-	}
-	
-	/*
 	 * Retorna uma lista de inteiros [s,d] tal que o argumento m = Math.pow(2,s)*d
 	 */
 	private static int[] extraiDois(int m) {
