@@ -264,7 +264,6 @@ public class RSA {
 	private static ArrayList<Integer> listaNumeroParaBlocos(int[] listaNumeros, int bloco) {
 		ArrayList<Integer> listaRetorno = new ArrayList<Integer>();
 		ArrayList<Integer> listaCopia = new ArrayList<Integer>();
-		Random c = new Random();
 		for (int i=0; i<listaNumeros.length;i++) {
 			listaCopia.add(listaNumeros[i]);
 		}
@@ -272,7 +271,7 @@ public class RSA {
 		if (listaCopia.size()%bloco!=0) {
 			int num = Math.abs(bloco-(listaCopia.size()%bloco));
 			for (int i=0;i<num;i++) {
-				listaCopia.add(c.nextInt(95) + 32);
+				listaCopia.add(0);
 			}
 		}
 		
