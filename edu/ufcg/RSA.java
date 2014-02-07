@@ -1,3 +1,13 @@
+/*
+ * Implementacao do algoritmo RSA em Java.
+ * 
+ * Equipe: 
+ * Leo Meira Vital
+ * Gustavo Monteiro Alves
+ * 
+ * Matematica Discreta
+ */
+
 package edu.ufcg;
 
 import java.math.BigInteger;
@@ -360,7 +370,7 @@ public class RSA {
 	 * Metodo para receber a chave publica.
 	 * @return A chave publica.
 	 */
-	public static int[] getChavePublica() {
+	public int[] getChavePublica() {
 		return chavePublica;
 	}
 	
@@ -406,5 +416,17 @@ public class RSA {
 	public static String descriptografarComChave(int[] mensagem, int[] chave) {
 		
 		return descriptografar(mensagem, chave[0], chave[1]);
+	}
+	
+	/*
+	 * Exemplo de funcionamento do codigo.
+	 */
+	public static void main(String[] args) {
+		RSA chave = new RSA();
+		String mensagem = "To be or not to be, that is the question.";
+		System.out.println(Arrays.toString(chave.getChavePublica()));
+		int[] mensagemCod = criptografarComChave(mensagem, chave.getChavePublica());
+		System.out.println(Arrays.toString(mensagemCod));
+		System.out.println(descriptografarComChavePrivada(mensagemCod));
 	}
 }
